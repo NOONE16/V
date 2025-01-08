@@ -3,6 +3,7 @@ name: My Simple Workflow
 on:
   push:
     branches: [ "main" ]
+  workflow_dispatch: # Add manual trigger here
 
 jobs:
   build:
