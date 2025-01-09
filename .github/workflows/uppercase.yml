@@ -32,7 +32,8 @@ jobs:
       - name: Save uppercase file to current repo
         run: |
           # Move the converted file into the current repository
-          mv uppercase.txt ./uppercase.txt
+          mv uppercase.txt uppercase_renamed.txt  # Rename the file
+
           # Add, commit, and push the modified file
           git config --global user.NOONE16 "GitHub Actions"
           git config --global user.datesiddhesh@gmail.com "actions@github.com"
