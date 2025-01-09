@@ -1,0 +1,41 @@
+name: Convert Text to Uppercase
+
+on:
+  push:
+    branches:
+      - main # Trigger the workflow on pushes to the 'main' branch
+
+jobs:
+  convert-text:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout the current repository
+      - name: Checkout current repository
+        uses: actions/checkout@v3
+
+      # Step 2: Clone the other repository containing the text file
+      - name: Clone another repository
+        run: |
+          git clone https://github.com/NOONE16/VII.git
+          cd VII
+          # Ensure the repository is up-to-date
+          git pull origin main
+
+      # Step 3: Convert the text file content to uppercase
+      - name: Convert text to uppercase
+        run: |
+          # Assuming the file is named 'input.txt' in the other repo
+          cat VII/input.txt | tr 'a-z' 'A-Z' > uppercase.txt
+
+      # Step 4: Save the uppercase file to the current repository
+      - name: Save uppercase file to current repo
+        run: |
+          # Move the converted file into the current repository
+          mv uppercase.txt ./uppercase.txt
+          # Add, commit, and push the modified file
+          git config --global user.NOONE16 "GitHub Actions"
+          git config --global user.datesiddhesh@gmail.com "actions@github.com"
+          git add uppercase.txt
+          git commit -m "Add uppercase text file"
+          git push origin main
