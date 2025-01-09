@@ -14,7 +14,19 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # Step 2: Run a simple command (e.g., echo "Hello, world!")
+      # Step 2: Set up Git configuration
+      - name: Configure Git
+        run: |
+          git config --global user.name "Your GitHub Username"
+          git config --global user.email "your-email@example.com"
+
+      # Step 3: Create a Git tag
+      - name: Create Git Tag
+        run: |
+          git tag -a v1.0 -m "Initial release of the project"
+          git push origin v1.0
+
+      # Step 4: Run a simple script (optional)
       - name: Run a script
         run: |
           echo "Hello, world!"
